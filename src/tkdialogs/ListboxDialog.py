@@ -10,6 +10,8 @@ from .internals.OkCancelButtons import OkCancelButtons
 
 
 class ListboxDialog:
+    Button = OkCancelButtons.Button
+
     @dataclass
     class Result:
         """
@@ -61,7 +63,7 @@ class ListboxDialog:
         self.result = self.Result()
 
     def on_button_ok(self):
-        self.result.button = OkCancelButtons.Button.OK
+        self.result.button = self.Button.OK
         self.result.item = self.listbox.get(self.listbox.curselection())
         self.window.destroy()
 

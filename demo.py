@@ -11,6 +11,8 @@ def listboxdialog():
     )
     result = listboxdialog.show()
     print(result)
+    if result.button == ListboxDialog.Button.OK:
+        print(f"You have chosen {result.item}")
 
 
 if __name__ == "__main__":
