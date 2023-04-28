@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tkdialogs"
+version = "0.1.0"
+authors = [
+  { name="René de Hesselle", email="dehesselle@web.de" },
+]
+description = "simple dialogs created with tkinter"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/dehesselle/tkdialogs"
+"Bug Tracker" = "https://github.com/dehesselle/tkdialogs/issues"

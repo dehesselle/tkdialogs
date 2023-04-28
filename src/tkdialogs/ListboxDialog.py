@@ -1,7 +1,8 @@
 import tkinter as tk
 from dataclasses import dataclass
 from typing import List
-from internals import Label, OkCancelButtons
+from .internals.Label import Label
+from .internals.OkCancelButtons import OkCancelButtons
 
 
 class ListboxDialog:
@@ -16,7 +17,6 @@ class ListboxDialog:
             The button that has been clicked.
         item : str
             The selected item if the OK button has been clicked. Otherwise empty string.
-
         """
 
         button: OkCancelButtons.Button = OkCancelButtons.Button.CANCEL
@@ -67,11 +67,3 @@ class ListboxDialog:
     def show(self) -> Result:
         self.window.mainloop()
         return self.result
-
-
-if __name__ == "__main__":
-    listboxdialog = ListboxDialog(
-        "name selection", "Please choose a name.", ["Adam", "Mary"]
-    )
-    result = listboxdialog.show()
-    print(result)
