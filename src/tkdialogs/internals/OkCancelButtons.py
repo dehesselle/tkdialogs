@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 René de Hesselle <dehesselle@web.de>
+#
+# SPDX-License-Identifier: MIT
+
 import tkinter as tk
 import tkinter.ttk as ttk
 from enum import Enum
