@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: MIT
 
 import tkinter as tk
+import tkinter.ttk as ttk
 from dataclasses import dataclass
 from typing import List
-from .internals.Label import Label
-from .internals.OkCancelButtons import OkCancelButtons
+from .internals import Label, OkCancelButtons
 
 
 class ListboxDialog:
@@ -43,22 +43,31 @@ class ListboxDialog:
         """
         self.window = tk.Tk()
         self.window.title(title)
-        self.window.minsize(150, 200)
         self.window.geometry("250x200")
+        self.window.grid()
+        self.window.rowconfigure(1, weight=1)
+        self.window.columnconfigure(0, weight=1)
 
-        self.label = Label(self.window, text=description)
-        self.label.pack(fill=tk.X, padx=5, pady=5)
+        self.label = Label(self.window, text=description, anchor=tk.CENTER)
+        self.label.grid(row=0, sticky="news")
 
-        self.listbox = tk.Listbox(self.window, height=5)
+        self.listbox = tk.Listbox(height=5)
+        self.listbox.grid(row=1, padx=5, sticky="news")
         for item in items:
             self.listbox.insert(tk.END, item)
         self.listbox.selection_set(0)
-        self.listbox.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         self.okcancelbuttons = OkCancelButtons(
             self.window, on_ok=self.on_button_ok, on_cancel=self.on_button_cancel
         )
-        self.okcancelbuttons.pack(side=tk.RIGHT, padx=5)
+        self.okcancelbuttons.grid(row=2, sticky="e", padx=5)
+
+        self.window.after(
+            0,
+            lambda: self.window.minsize(
+                self.okcancelbuttons.winfo_width(), self.listbox.winfo_height()
+            ),
+        )
 
         self.result = self.Result()
 
