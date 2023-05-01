@@ -26,7 +26,7 @@ class ListboxDialog:
         """
 
         button: OkCancelButtons.Button = OkCancelButtons.Button.CANCEL
-        item: str = ""
+        item: str = None
 
     def __init__(self, title: str, description: str, items: List[str]):
         """
