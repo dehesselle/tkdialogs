@@ -1,0 +1,31 @@
+package:
+  name: tkdialogs
+  version: 0.1.0
+
+source:
+  path: .
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+about:
+  home: https://github.com/dehesselle/tkdialogs
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: "dialogs made with tkinter"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - 11375494
