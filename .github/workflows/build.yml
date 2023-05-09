@@ -13,7 +13,7 @@ env:
   PYTHON_VERSION: "3.10"
 
 jobs:
-  pip:
+  pip: #---------------------------------------- create sdist and wheel packages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -36,7 +36,7 @@ jobs:
         with:
           name: wheel
           path: dist/tkdialogs-*.whl
-  conda:
+  conda: #------------------------------------------------- create conda package
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -54,3 +54,21 @@ jobs:
         with:
           name: conda
           path: noarch/tkdialogs-*.tar.bz2
+  release: #-------------------- create/update rolling release for latest commit
+    runs-on: ubuntu-latest
+    needs:
+      - pip
+      - conda
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+      - name: create/update prerelease
+        uses: ncipollo/release-action@v1
+        with:
+          name: latest
+          artifacts: "conda/*,sdist/*,wheel/*"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: true
+          allowUpdates: true
+          removeArtifacts: true
+          tag: latest
